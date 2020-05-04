@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Slider</title>
+	</head>
+	<body>
+		<div id="root">
+			<button onclick="handlers.previous()">Previous</button>
+			<img>
+			<button onclick="handlers.next()">Next</button>
+		</div>
+	</body>
+	<script>
+		const app = {
+
+			images: [
+					"images/hiker-in-the-woods-stops-to-tie-laces.jpg",
+					"images/man-holding-a-leather-bag-on-a-set-of-stairs.jpg", 
+					"images/social-distance-in-letter-tiles.jpg"
+				],
+
+			count: 0,
+
+			next: function() {
+				let currentImgNum = this.count;
+
+				const totalImgNum = this.images.length - 1;
+
+				if (currentImgNum < totalImgNum) {
+					currentImgNum ++;
+				} else {
+					currentImgNum = 0;
+				}
+
+				this.count = currentImgNum
+
+				render.display();
+
+			},
+			previous: function() {
+				let currentImgNum = this.count;
+
+				const totalImgNum = this.images.length - 1;
+
+				if (currentImgNum > 0) {
+					currentImgNum --;
+				} else {
+					currentImgNum = totalImgNum;
+				}
+				this.count = currentImgNum
+				
+				render.display();
+			}
+		}
+
+		const handlers = {
+			next: function() {
+				app.next();
+			},
+			previous: function() {
+				app.previous();
+			}
+
+		}
+
+		const render = {
+			display: function() {
+				const img = document.querySelector('img')
+
+					img.src = app.images[app.count] 
+			}
+		}
+
+		setInterval(handlers.next, 5000)
+
+		render.display()
+
+	</script>
+</html>
